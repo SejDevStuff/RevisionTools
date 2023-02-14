@@ -25,9 +25,10 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     tools.insert({"Memorise Text", tm});
+    tools.insert({"Flashcards", fc});
 
     int row = 0;
-    int col = 0;
+    int col = -1;
 
     for (auto const& tool : tools) {
         col++;

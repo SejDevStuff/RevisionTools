@@ -16,12 +16,19 @@ textmemorise_createset::~textmemorise_createset()
 void textmemorise_createset::reset() {
     ui->setTitle->setText("");
     ui->setContents->setPlainText("");
+    ui->setKnowPercent->setValue(0);
 }
 
 void textmemorise_createset::on_pushButton_clicked()
 {
-    QString title = ui->setTitle->text();
-    QString contents = ui->setContents->toPlainText();
+    QString title = ui->setTitle->text().trimmed();
+    QString contents = ui->setContents->toPlainText().trimmed();
+    int knowPercent = ui->setKnowPercent->value();
+
+    if ((knowPercent % 10) != 0) {
+        QMessageBox::critical(this, tr("Create Set"), tr("The percentage should be a multiple of 10"));
+        return;
+    }
 
     if (title.trimmed() == "" || contents.trimmed() == "") {
         QMessageBox::critical(this, tr("Create Set"), tr("Please fill out the data correctly"));
@@ -46,7 +53,7 @@ void textmemorise_createset::on_pushButton_clicked()
         return;
     }
 
-    int8_t percentComplete = 0;
+    int8_t percentComplete = knowPercent;
     uint16_t titleSz = title.size();
     uint64_t textSz = contents.size();
 
@@ -65,6 +72,11 @@ void textmemorise_createset::on_pushButton_clicked()
     if (!outSet) {
         QMessageBox::critical(this, tr("Create Set"), tr("There was an error writing to the set"));
         return;
+    }
+
+    char magic[] = {'S', 'E', 'T', '0'};
+    for (int i = 0; i < 4; i++) {
+        outSet.write(&magic[i], sizeof(magic[i]));
     }
 
     outSet.write((char*)&percentComplete, sizeof(percentComplete));

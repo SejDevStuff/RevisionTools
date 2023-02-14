@@ -72,6 +72,30 @@
      <widget class="QPlainTextEdit" name="setContents"/>
     </item>
     <item>
+     <layout class="QHBoxLayout" name="knowGuage">
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>How much of the set do you know?</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="setKnowPercent">
+        <property name="suffix">
+         <string>%</string>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="singleStep">
+         <number>10</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
      <widget class="QPushButton" name="pushButton">
       <property name="text">
        <string>Save</string>

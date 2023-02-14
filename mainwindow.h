@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include "textmemorise.h"
+#include "flashcards.h"
+
 #include <QMainWindow>
 #include <QPushButton>
 #include <map>
@@ -25,7 +27,10 @@ public:
 private:
     Ui::MainWindow *ui;
     std::map<std::string, QWidget*> tools;
+
     TextMemorise* tm = new TextMemorise();
+    Flashcards* fc = new Flashcards();
+
     QSignalMapper mapper;
 
 private slots:

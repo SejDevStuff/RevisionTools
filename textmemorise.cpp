@@ -52,6 +52,17 @@ SetStructure parseSet(std::string fpath) {
     SetStructure structure;
     std::ifstream inSet(fpath, std::ios::binary);
 
+    std::string magic;
+    for (int i = 0; i < 4; i++) {
+        char byte;
+        inSet.read(&byte, 1);
+        magic += byte;
+    }
+
+    if (magic != "SET0") {
+        return structure;
+    }
+
     inSet.read(reinterpret_cast<char*>(&structure.percentCompleted), sizeof(int8_t));
     inSet.read(reinterpret_cast<char*>(&structure.titleSz), sizeof(uint16_t));
 
@@ -72,10 +83,10 @@ SetStructure parseSet(std::string fpath) {
 }
 
 void TextMemorise::writeSet(SetStructure set) {
-    QString title = QString::fromStdString(set.title);
-    QString contents = QString::fromStdString(set.contents);
+    QString title = QString::fromStdString(set.title).trimmed();
+    QString contents = QString::fromStdString(set.contents).trimmed();
 
-    if (title.trimmed() == "" || contents.trimmed() == "") {
+    if (title == "" || contents == "") {
         QMessageBox::critical(this, tr("Memorise Text"), tr("Error saving set"));
         return;
     }
@@ -106,8 +117,13 @@ void TextMemorise::writeSet(SetStructure set) {
     std::ofstream outSet("./RevisionTools_data/textmemorise/" + safeText.toStdString() + ".set", std::ios::binary);
 
     if (!outSet) {
-        QMessageBox::critical(this, tr("Create Set"), tr("There was an error writing to the set"));
+        QMessageBox::critical(this, tr("Memorise Text"), tr("There was an error writing to the set"));
         return;
+    }
+
+    char magic[] = {'S', 'E', 'T', '0'};
+    for (int i = 0; i < 4; i++) {
+        outSet.write(&magic[i], sizeof(magic[i]));
     }
 
     outSet.write((char*)&percentComplete, sizeof(percentComplete));
@@ -146,8 +162,20 @@ void TextMemorise::loadSets() {
             inSet.open(filename, std::ios::binary);
 
             if (!inSet) {
-                QMessageBox::critical(this, tr("Memorise Text"), tr("There was an error reading a set"));
-                return;
+                inSet.close();
+                continue;
+            }
+
+            std::string magic;
+            for (int i = 0; i < 4; i++) {
+                char byte;
+                inSet.read(&byte, 1);
+                magic += byte;
+            }
+
+            if (magic != "SET0") {
+                inSet.close();
+                continue;
             }
 
             inSet.read(reinterpret_cast<char*>(&percentCompleted), sizeof(int8_t));

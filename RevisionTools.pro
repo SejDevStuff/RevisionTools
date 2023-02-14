@@ -9,18 +9,26 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    flashcards.cpp \
     main.cpp \
     mainwindow.cpp \
+    pairedsetcreator.cpp \
+    pairedsetwriter.cpp \
     textmemorise.cpp \
     textmemorise_createset.cpp
 
 HEADERS += \
+    flashcards.h \
     mainwindow.h \
+    pairedsetcreator.h \
+    pairedsetwriter.h \
     textmemorise.h \
     textmemorise_createset.h
 
 FORMS += \
+    flashcards.ui \
     mainwindow.ui \
+    pairedsetcreator.ui \
     textmemorise.ui \
     textmemorise_createset.ui
 
