@@ -7,7 +7,6 @@ void MainWindow::dashItemPushed(QString s)
     if (tool != tools.end()) {
         tool->second->setWindowTitle(s);
         tool->second->show();
-        hide();
     }
 }
 
@@ -26,21 +25,24 @@ MainWindow::MainWindow(QWidget *parent)
 
     tools.insert({"Memorise Text", tm});
     tools.insert({"Flashcards", fc});
+    tools.insert({"Paired Set Creator", psc});
 
     int row = 0;
-    int col = -1;
+    int col = 0;
 
     for (auto const& tool : tools) {
-        col++;
-        if (col >= 2) {
-            col = 0;
-            row++;
-        }
+
         QPushButton* b = new QPushButton();
         b->setText(QString::fromStdString(tool.first));
         connect(b, SIGNAL(clicked()), &mapper, SLOT(map()));
         mapper.setMapping(b, QString::fromStdString(tool.first));
         ui->appDash->addWidget(b, row, col);
+
+        col++;
+        if (col >= 3) {
+            col = 0;
+            row++;
+        }
     }
 
     connect(&mapper, SIGNAL(mappedString(QString)), this, SLOT(dashItemPushed(QString)));

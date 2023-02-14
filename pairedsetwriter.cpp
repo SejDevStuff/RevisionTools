@@ -108,7 +108,7 @@ bool PairedSetWriter::WritePairedSet(QString title, std::vector<PSetPair> pairs)
         }
     }
 
-    std::ifstream f("./RevisionTools_data/" + safeText.toStdString() + ".set");
+    std::ifstream f("./RevisionTools_data/" + safeText.toStdString() + ".pset");
     bool exists = f.good();
     f.close();
 

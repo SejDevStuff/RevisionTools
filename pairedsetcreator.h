@@ -7,6 +7,7 @@
 #include <QListWidgetItem>
 #include <iostream>
 #include <QMessageBox>
+#include <QCloseEvent>
 
 #include "pairedsetwriter.h"
 
@@ -40,6 +41,9 @@ private:
 
     std::map<QListWidgetItem*, PSetPair> pairMap;
     QListWidgetItem* currentPair;
+
+protected:
+    void closeEvent(QCloseEvent *event) override;
 };
 
 #endif // PAIREDSETCREATOR_H

@@ -3,6 +3,7 @@
 
 #include "textmemorise.h"
 #include "flashcards.h"
+#include "pairedsetcreator.h"
 
 #include <QMainWindow>
 #include <QPushButton>
@@ -30,6 +31,7 @@ private:
 
     TextMemorise* tm = new TextMemorise();
     Flashcards* fc = new Flashcards();
+    PairedSetCreator* psc = new PairedSetCreator();
 
     QSignalMapper mapper;
 

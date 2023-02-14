@@ -176,7 +176,13 @@ void PairedSetCreator::on_SaveSet_clicked()
         QMessageBox::critical(this, tr("Create Paired Set - Error"), tr("There was an error writing to the set"));
         return;
     } else {
+        reset();
         this->hide();
     }
 }
 
+void PairedSetCreator::closeEvent(QCloseEvent *event)
+{
+    reset();
+    event->accept();
+}
