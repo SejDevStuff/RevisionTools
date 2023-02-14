@@ -15,6 +15,19 @@ The two sets are unfortunately not interchangeable (i.e: "Memorise Tools" cannot
 The program is a work in progress. More tools will be added.
 
 ### Memorise Text
+_Works with ``normal sets``_<br>
 This program was created to help people memorise long pieces of text, such as speeches, by repetitively asking the user to fill in the blanks of the text. When you first revise a "set", the program will randomly hide 10% of the words, and ask you to fill it in. If you get 80% or more correct, the program increases the amount of words it hides to 20%, and so on. If you get less than 80% correct, the program will decrease the amount of words it hides.
 
 ![image](https://user-images.githubusercontent.com/60989665/218461618-ea11bd29-cc26-4800-8929-e20ab50c4358.png)
+
+### Flashcards
+_Works with ``paired sets``_<br>
+This is a simple flashcard program which can help you memorise paired sets easily. It displays all the pairs in a Paired Set as "flashcards", and offers basic functionality such as flipping the flashcard, and flagging the card for further revision. This program is intended to be used with other Paired Set compatible programs (such as Match Up [coming soon]) for effective revision.
+
+![image](https://user-images.githubusercontent.com/60989665/218768225-13a4a9ad-c076-456b-8f5e-296459795df3.png)
+
+### Paired Set Creator
+_Works with ``paired sets``_<br>
+This isn't a revision tool, but instead a tool which offers a simple way to create and save Paired Sets (PSETs), which are needed for programs such as Flashcards. This tool is also integrated in other Paired Set compatible programs (such as Flashcards), so you don't need to run it separately to be able create a paired set. 
+
+![image](https://user-images.githubusercontent.com/60989665/218768881-c1719e6b-0baa-4392-a433-b3df607b84bd.png)
